@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Ensures proper scaling on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MY SMART SENTENCE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Include ResponsiveVoice for text-to-speech -->
+  <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
+
+  <style>
+    /* Remove default margin/padding */
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Lexend', sans-serif;
+      background-color: #f0f0f0;
+    }
+
+    /*
+      #scaler at a base width of 1200px,
+      then we'll shrink it via JS on narrower screens
+    */
+    #scaler {
+      width: 1200px; /* Desktop reference width */
+      margin: 0;
+      transform-origin: top left;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2em;
+      background-color: #3366FF;
+      color: #FFFFFF;
+      padding: 20px 0;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-bottom: 2px solid #999;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    .reel-title {
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border-radius: 8px;
+      padding: 4px 8px;
+      text-align: center;
+      font-size: 28px;
+      min-height: 40px;
+      line-height: 40px;
+      white-space: nowrap;
+      margin-bottom: 10px;
+    }
+
+    .reel {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      border: 4px solid #333;
+      border-radius: 20px;
+      background-color: white;
+      overflow: hidden;
+      position: relative;
+      box-sizing: border-box;
+      text-align: center;
+      height: 240px;
+    }
+
+    .images {
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.5s ease;
+    }
+
+    .image-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      box-sizing: border-box;
+      height: 240px;
+      padding: 10px;
+    }
+
+    .image-container img {
+      width: 160px;
+      height: auto;
+    }
+
+    .label {
+      margin-top: 8px;
+      margin-bottom: 10px;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-size: 28px;
+      white-space: nowrap;
+      text-transform: none; /* Keep text as-is */
+      cursor: pointer;       /* Indicates clickability for TTS */
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .arrow-button {
+      width: 60px;
+      height: 60px;
+      font-size: 40px;
+      background-color: #f2f2f2;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      cursor: pointer;
+      outline: none;
+    }
+    .arrow-button:hover {
+      background-color: #eee;
+    }
+    .arrow-button:active {
+      background-color: #ddd;
+    }
+
+    /* Color-coded background for reel #4 labels */
+    #reel4 .label { background-color: #9c27b0; }
+  </style>
+</head>
+<body>
+  <div id="scaler">
+    <h1>MY SMART SENTENCE</h1>
+    
+    <!-- Only the 4th reel ("Gapo") -->
+    <div class="column">
+      <div class="reel-title">Gapo</div>
+      <div class="reel" id="reel4">
+        <div class="images" id="images4">
+          <div class="image-container">
+            <img src="images/cat.webp" alt="box">
+            <div class="label">cat</div>
+          </div>
+          <div class="image-container">
+            <img src="images/cats.webp" alt="boxes">
+            <div class="label">cats</div>
+          </div>
+          <div class="image-container">
+            <img src="images/pencil.webp" alt="bed">
+            <div class="label">pencil</div>
+          </div>
+          <div class="image-container">
+            <img src="images/pencils.webp" alt="beds">
+            <div class="label">pencils</div>
+          </div>
+          <div class="image-container">
+            <img src="images/key.webp" alt="pony">
+            <div class="label">key</div>
+          </div>
+          <div class="image-container">
+            <img src="images/keys.webp" alt="ponies">
+            <div class="label">keys</div>
+          </div>
+          <div class="image-container">
+            <img src="images/book.webp" alt="ball">
+            <div class="label">book</div>
+          </div>
+          <div class="image-container">
+            <img src="images/books.webp" alt="balls">
+            <div class="label">books</div>
+          </div>
+          <div class="image-container">
+            <img src="images/boy.webp" alt="dress">
+            <div class="label">boy</div>
+          </div>
+          <div class="image-container">
+            <img src="images/boys.webp" alt="dresses">
+            <div class="label">boys</div>
+          </div>
+          <div class="image-container">
+            <img src="images/field.webp" alt="dresses">
+            <div class="label">field</div>
+          </div>
+          <div class="image-container">
+            <img src="images/table.webp" alt="dresses">
+            <div class="label">table</div>
+          </div>
+          <div class="image-container">
+            <img src="images/pillow.webp" alt="dresses">
+            <div class="label">pillow</div>
+          </div>
+          <div class="image-container">
+            <img src="images/field.webp" alt="dresses">
+            <div class="label">field</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button class="arrow-button" onclick="scrollUp()">▲</button>
+        <button class="arrow-button" onclick="scrollDown()">▼</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Keep the reel position and total images
+    let reelPosition = 0;
+    const totalImages = 14; // number of items in the fourth reel
+
+    // Dynamically scale #scaler
+    function setScale() {
+      const scaler = document.getElementById('scaler');
+      const availableWidth = document.documentElement.clientWidth || window.innerWidth;
+      let scaleVal = availableWidth / 1200;
+      if (scaleVal > 1) scaleVal = 1;
+      scaler.style.transform = `scale(${scaleVal})`;
+      scaler.style.transformOrigin = 'top left';
+    }
+
+    window.addEventListener('load', setScale);
+    window.addEventListener('resize', setScale);
+
+    // Text-to-speech using ResponsiveVoice
+    function speak(text) {
+      if (window.responsiveVoice) {
+        responsiveVoice.speak(text, "UK English Male");
+      } else {
+        console.error("ResponsiveVoice API not available.");
+      }
+    }
+
+    // Scroll up through reel #4
+    function scrollUp() {
+      reelPosition = (reelPosition - 1 + totalImages) % totalImages;
+      const offset = reelPosition * 240;
+      document.getElementById('images4').style.transform = `translateY(-${offset}px)`;
+      
+      // Speak the newly shown label
+      const containers = document.querySelectorAll("#images4 .image-container");
+      const newLabelEl = containers[reelPosition].querySelector(".label");
+      speak(newLabelEl.textContent.trim());
+    }
+
+    // Scroll down through reel #4
+    function scrollDown() {
+      reelPosition = (reelPosition + 1) % totalImages;
+      const offset = reelPosition * 240;
+      document.getElementById('images4').style.transform = `translateY(-${offset}px)`;
+      
+      // Speak the newly shown label
+      const containers = document.querySelectorAll("#images4 .image-container");
+      const newLabelEl = containers[reelPosition].querySelector(".label");
+      speak(newLabelEl.textContent.trim());
+    }
+
+    // On page load, add click-to-speak listeners to labels
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.label').forEach(labelEl => {
+        labelEl.addEventListener('click', () => {
+          speak(labelEl.textContent.trim());
+        });
+      });
+    });
+  </script>
+</body>
+</html>
